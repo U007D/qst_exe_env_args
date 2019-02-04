@@ -12,13 +12,15 @@
 #![allow(clippy::match_bool,)]
 
 use {{crate_name}}::{
-    Args,
     Result,
     run,
 };
 use structopt::StructOpt;
 
 fn main() -> Result<()> {
-    run(Args::from_args())?;
+    run(std::env::args_os()
+            .map(|os_str| os_str.into_string())
+            .collect::<StdResult<Vec<_>, _>>())?;
+
     Ok(())
 }

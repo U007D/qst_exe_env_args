@@ -12,13 +12,11 @@
 // ^^^ End of safety-critical lint section ^^^
 #![allow(clippy::match_bool,)]
 pub use {
-    args::Args,
     consts::*,
     error::Error,
 };
 use std::result::Result as StdResult;
 
-mod args;
 mod consts;
 mod error;
 pub type Result<T> = StdResult<T, Error>;
