@@ -12,6 +12,7 @@ test = false
 
 [dependencies]
 structopt = "*"
+derive_more = "*"
 
 [profile.dev]
 codegen-units = 1

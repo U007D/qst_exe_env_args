@@ -1,31 +1,8 @@
-use std::{
-    ffi::OsString,
-    fmt::{
-        Display,
-        Formatter,
-        Result as FmtResult,
-    },
-};
+use crate::consts::msg;
+use derive_more::*;
 
-use crate::consts::*;
-
-#[derive(Debug)]
+#[derive(Debug, Display, From, PartialEq)]
 pub enum Error {
-    ArgNotConvertibleToUtf8(OsString),
-}
-
-impl Display for Error {
-    fn fmt(&self, f: &mut Formatter) -> FmtResult {
-        write!(f, "{}", match self {
-            Error::ArgNotConvertibleToUtf8(os_string) => format!("{}: {:?}",
-                                                                 msg::ERR_ARG_NOT_CONVERTIBLE_TO_UTF_8,
-                                                                 os_string),
-        })
-    }
-}
-
-impl From<OsString> for Error {
-    fn from(err: OsString) -> Self {
-        Error::ArgNotConvertibleToUtf8(err)
-    }
+    #[display(fmt = "{}: {:?}", "msg::ERR_ARG_NOT_CONVERTIBLE_TO_UTF_8", "_0")]
+    ArgNotConvertibleToUtf8(std::ffi::OsString),
 }
